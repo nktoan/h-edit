@@ -33,3 +33,24 @@ def encode_text(model, prompts: Union[str, List[str]]):
         text_encoding = model.text_encoder(text_input.input_ids.to(model.device))[0]
         
     return text_encoding
+
+
+def get_variance(model, timestep):
+    """
+    Compute the variance for a given timestep in DDIM sampling formula (\omega_{t,t-1}^2 in Eq. 3 of our paper)
+
+    Parameters:
+        model: Diffusion model with a scheduler providing diffusion parameters.
+        timestep (int): Current timestep in the reverse diffusion process.
+
+    Returns:
+        torch.Tensor: Computed variance for the given timestep.
+    """
+
+    prev_timestep = timestep - model.scheduler.config.num_train_timesteps // model.scheduler.num_inference_steps
+    alpha_prod_t = model.scheduler.alphas_cumprod[timestep]
+    alpha_prod_t_prev = model.scheduler.alphas_cumprod[prev_timestep] if prev_timestep >= 0 else model.scheduler.final_alpha_cumprod
+    beta_prod_t = 1 - alpha_prod_t
+    beta_prod_t_prev = 1 - alpha_prod_t_prev
+    variance = (beta_prod_t_prev / beta_prod_t) * (1 - alpha_prod_t / alpha_prod_t_prev)
+    return variance
