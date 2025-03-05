@@ -25,7 +25,7 @@ We showcase *h*-Edit's capabilities in three settings: **text-guided editing** (
 
 🎨 [**Combined Text-Guided & Style Editing**](https://github.com/nktoan/h-edit/tree/main/text-guided-n-style)
 
-📢 📢 📢 If *h*-Edit helps your work, we’d love your feedback! Please cite our paper and giving us a ⭐ - it means a lot! 🚀
+> 📢 📢 📢 If *h*-Edit helps your work, we’d love your feedback! Please cite our paper and giving us a ⭐ - it means a lot! 🚀
 
 > [!IMPORTANT]
 > If this repository is useful for your work, please cite it:
