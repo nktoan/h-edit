@@ -1,3 +1,17 @@
+"""
+This demo presents our SOTA editing method, h-edit-R + P2P. Its powerful features include:
+
+- Tuning: Adjust parameters w^orig, hat{w}^orig, w^edit.
+- Multiple Optimization Loops, with a reconstruction weight for enhanced faithfulness.
+- P2P Parameters: Customize editing with xa, sa parameters of P2P.
+- Step Skipping: Optionally bypass steps for efficiency and more faithfulness.
+- Other Option: Try the alternative explicit approach if desired.
+
+Happy coding and researching!
+h-Edit's Authors.
+
+"""
+
 import argparse
 import os
 import sys
@@ -9,7 +23,7 @@ import gc
 import numpy as np
 from PIL import Image
 
-from utils.utils import image_grid, dataset_from_json
+from utils.utils import image_grid, dataset_from_json, dataset_from_yaml
 
 import torch
 from torch import autocast, inference_mode
@@ -25,7 +39,7 @@ from inversion.p2p_h_edit import h_Edit_p2p_explicit, h_Edit_p2p_implicit, h_Edi
 
 from p2p.ptp_classes import AttentionStore, load_512
 from p2p.ptp_utils import register_attention_control
-from p2p.ptp_controller_utils import make_controller
+from p2p.ptp_controller_utils import make_controller, preprocessing
 
 import copy
 import gc
@@ -41,11 +55,10 @@ if __name__ == "__main__":
     parser.add_argument("--device_num", type=int, default=0)
     
     # Data and output path
-    parser.add_argument('--data_path', type=str, default="./PIE_Bench_Data")
-    parser.add_argument('--output_path', type=str, default="./output_images/p2p")
+    parser.add_argument('--data_path', type=str, default="./assets/")
+    parser.add_argument('--output_path', type=str, default="./demo/real_images")
 
     # Choose methods and editing categories
-    parser.add_argument('--edit_category_list', nargs = '+', type=str, default=["0","1","2","3","4","5","6","7","8","9"]) 
     parser.add_argument("--mode",  default="h_edit_R_p2p", help="modes: h_edit_R, ef, h_edit_D_p2p, nmg_p2p, pnp_inv_p2p, h_edit_R_p2p, ef_p2p")
 
     # Sampling and skipping steps
@@ -69,6 +82,7 @@ if __name__ == "__main__":
     parser.add_argument("--xa", type=float, default=0.4) #cross attn control
     parser.add_argument("--sa", type=float, default=0.6) #self attn control: 0.6 for h-edit-D and 0.35 for h-edit-R
 
+
     args = parser.parse_args()
 
     if not args.implicit:
@@ -81,7 +95,7 @@ if __name__ == "__main__":
     output_path=args.output_path
     edit_category_list=args.edit_category_list
 
-    full_data = dataset_from_json(data_path + '/mapping_file.json')
+    full_data = dataset_from_yaml(data_path + "test_demo.yaml")
     device = f"cuda:{args.device_num}"
 
     cfg_scale_src = args.cfg_src
@@ -95,8 +109,6 @@ if __name__ == "__main__":
     # 2. Load Diffusion Models - can be any off-the-shelf diffusion model, v-1.5, or your local models
     model_id = "CompVis/stable-diffusion-v1-4" # model_id = "stable_diff_local"
 
-    # 3. Define output strings
-
     xa_sa_string = f'_xa_{args.xa}_sa{args.sa}_' if args.mode in ['h_edit_D_p2p', 'nmg_p2p', 'pnp_inv_p2p', 'h_edit_R_p2p', 'ef_p2p'] else '_'
     weight_string = f'implicit_{args.implicit}_eta_{args.eta}_src_orig_{cfg_scale_src}_src_edit_{cfg_scale_src_edit}_tar_scale_{cfg_scale_tar_edit}_w_rec_{args.weight_reconstruction}_n_opts_{args.optimization_steps}_time_{time_stamp}'
 
@@ -105,9 +117,8 @@ if __name__ == "__main__":
 
     # 5. Editing LOOP over all samples of the dataset
 
-    for key, item in full_data.items():
-        if item["editing_type_id"] not in edit_category_list:
-            continue
+    for i in range(len(full_data)):
+        current_image_data = full_data[i]
 
         # 5.1. Define DDIM or DDPM Inversion (deterministic or random)
         eta = args.eta
@@ -116,14 +127,13 @@ if __name__ == "__main__":
         # 5.2. Clone a model to avoid attention masks tracking from previous samples
         ldm_stable_each_query = copy.deepcopy(ldm_stable).to(device)
 
-        # 5.3. Load prompts
-        original_prompt = item["original_prompt"].replace("[", "").replace("]", "")
-        editing_prompt = item["editing_prompt"].replace("[", "").replace("]", "")
-        
-        # 5.4. Define path to the image, editing_instruction, blended_word for P2P
-        image_path = os.path.join(f"{data_path}/annotation_images", item["image_path"])
-        editing_instruction = item["editing_instruction"]
-        blended_word = item["blended_word"].split(" ") if item["blended_word"] != "" else []
+        # 5.3 + 5.4. Define path to the image, editing_instruction, blended_word for P2P/ Load prompts
+        image_path = data_path + current_image_data['img']
+
+        original_prompt = current_image_data.get('source_prompt', "") # default empty string
+        editing_prompt = current_image_data.get('target_prompt', "")
+
+        blended_word = current_image_data["blended_word"].split(" ") if current_image_data["blended_word"] != "" else []
 
         # 5.5. Finalize the output path
 
@@ -168,30 +178,25 @@ if __name__ == "__main__":
         else:
             print("Warning: out of range for eta")
             sys.exit(1)
-
+                
         # 5.11. Prepare P2P arguments
 
         after_skip_steps = args.num_diffusion_steps-args.skip
 
-        # 5.11.1. Check if number of words in encoder and decoder text are equal
-        src_tar_len_eq = (len(original_prompt.split(" ")) == len(editing_prompt.split(" ")))
-        src_tar_len_eq_chosen = False
-        
-        if is_ddim_inversion and key in ['111000000001', '111000000004', '111000000009', '121000000007', '122000000006', '121000000007', '121000000000', '121000000001']:
-            src_tar_len_eq_chosen = src_tar_len_eq 
-        if not is_ddim_inversion and key in ['122000000005', '122000000006', '000000000099', '214000000009']:
-            src_tar_len_eq_chosen = src_tar_len_eq 
-        
-        src_tar_len_eq_chosen = False
-        if args.mode not in ['h_edit_D_p2p', 'h_edit_R_p2p']:
-            src_tar_len_eq_chosen = False
+        # 5.11.1 Check if number of words in encoder and decoder text are equal
+        src_tar_len_eq_chosen = (len(original_prompt.split(" ")) == len(editing_prompt.split(" ")))
 
         # 5.11.2.  blend_word and importance weight eq_params
         prompts = [original_prompt, editing_prompt] 
+
         if args.mode[-3:] == 'p2p':
             assert len(prompts)>=2, "only for editing with prompts"
 
-            #blend_word is provided in the dataset for P2P
+            #blend_word is provided in the dataset for P2P or use human knowledge
+            #is_global_edit is tricky, require human knowledge
+            
+            #We provide a preprocessing function here to heuristically choose blend word and word imporantance to focus
+            blend_word, eq_params_heuristic = preprocessing(original_prompt, editing_prompt, is_global_edit=True)
             blend_word= (((blended_word[0], ), (blended_word[1], ))) if len(blended_word) else None
 
             if (args.mode == 'h_edit_R_p2p' or args.mode == 'h_edit_D_p2p') and (args.optimization_steps > 1):
@@ -199,9 +204,20 @@ if __name__ == "__main__":
             else:
                 eq_params={ "words": (blended_word[1], ), "values": (2.0, )} if len(blended_word) else None
 
+            if eq_params_heuristic is not None:
+                if eq_params is not None:
+                    eq_params_merged = {
+                        'words': eq_params['words'] + eq_params_heuristic['words'],
+                        'values': eq_params['values'] + eq_params_heuristic['values']
+                    }
+                else:
+                    eq_params_merged = eq_params_heuristic
+            else:
+                eq_params_merged = eq_params
+                
             controller = make_controller(prompts=prompts,  is_replace_controller = src_tar_len_eq_chosen,
                     cross_replace_steps=args.xa, self_replace_steps=args.sa,
-                    blend_word=blend_word, equilizer_params=eq_params,
+                    blend_word=blend_word, equilizer_params=eq_params_merged,
                     num_steps=after_skip_steps, tokenizer=ldm_stable_each_query.tokenizer, device=ldm_stable_each_query.device)
                 
         else:
@@ -209,54 +225,31 @@ if __name__ == "__main__":
 
         register_attention_control(ldm_stable_each_query, controller)
 
-        # 5.12 Editing, available methods: h_edit_R, ef, h_edit_D_p2p, nmg_p2p, pnp_inv_p2p, h_edit_R_p2p, ef_p2p
+        
+        # 5.12 Editing, available methods: h_edit_R, h_edit_D_p2p, h_edit_R_p2p
 
-        if args.mode in ['h_edit_R', 'h_edit_D_p2p', 'h_edit_R_p2p']:
-            cfg_scale_list = [cfg_scale_src, cfg_scale_src_edit, cfg_scale_tar_edit]     
+        cfg_scale_list = [cfg_scale_src, cfg_scale_src_edit, cfg_scale_tar_edit]     
 
-            if args.implicit:
-                if args.mode == 'h_edit_R':
-                    edited_w0, _ = h_Edit_R_implicit(ldm_stable_each_query, xT=wts[after_skip_steps], eta=eta, prompts=prompts, cfg_scales=cfg_scale_list,
-                                                   prog_bar = True, zs = zs[:(after_skip_steps)], controller = controller, weight_reconstruction = args.weight_reconstruction,
-                                                   optimization_steps=args.optimization_steps, after_skip_steps=after_skip_steps, is_ddim_inversion=is_ddim_inversion)
-                else:
-                    edited_w0, _ = h_Edit_p2p_implicit(ldm_stable_each_query, xT=wts[after_skip_steps], eta=eta, prompts=prompts, cfg_scales=cfg_scale_list,
-                                                   prog_bar = True, zs = zs[:(after_skip_steps)], controller = controller, weight_reconstruction = args.weight_reconstruction,
-                                                   optimization_steps=args.optimization_steps, after_skip_steps=after_skip_steps, is_ddim_inversion=is_ddim_inversion)
-
+        if args.implicit:
+            if args.mode == 'h_edit_R':
+                edited_w0, _ = h_Edit_R_implicit(ldm_stable_each_query, xT=wts[after_skip_steps], eta=eta, prompts=prompts, cfg_scales=cfg_scale_list,
+                                                prog_bar = True, zs = zs[:(after_skip_steps)], controller = controller, weight_reconstruction = args.weight_reconstruction,
+                                                optimization_steps=args.optimization_steps, after_skip_steps=after_skip_steps, is_ddim_inversion=is_ddim_inversion)
             else:
-                if args.mode == 'h_edit_R':
-                    edited_w0, _ = h_Edit_R_explicit(ldm_stable_each_query, xT=wts[after_skip_steps], eta=eta, prompts=prompts, cfg_scales=cfg_scale_list,
-                                                   prog_bar = True, zs = zs[:(after_skip_steps)], controller = controller, 
-                                                   after_skip_steps=after_skip_steps, is_ddim_inversion=is_ddim_inversion)
-                else:
-                    edited_w0, _ = h_Edit_p2p_explicit(ldm_stable_each_query, xT=wts[after_skip_steps], eta=eta, prompts=prompts, cfg_scales=cfg_scale_list,
-                                                   prog_bar = True, zs = zs[:(after_skip_steps)], controller = controller, 
-                                                   after_skip_steps=after_skip_steps, is_ddim_inversion=is_ddim_inversion)
+                edited_w0, _ = h_Edit_p2p_implicit(ldm_stable_each_query, xT=wts[after_skip_steps], eta=eta, prompts=prompts, cfg_scales=cfg_scale_list,
+                                                prog_bar = True, zs = zs[:(after_skip_steps)], controller = controller, weight_reconstruction = args.weight_reconstruction,
+                                                optimization_steps=args.optimization_steps, after_skip_steps=after_skip_steps, is_ddim_inversion=is_ddim_inversion)
 
-        elif args.mode=='nmg':
-            cfg_scale_list = [cfg_scale_src_edit, cfg_scale_tar_edit]
-            
-            edited_w0, _ = nmg_p2p(ldm_stable_each_query, xT=wts[after_skip_steps], xT_ori=wts[:(after_skip_steps+1)], etas=0.0, 
-                                   prompts=prompts, cfg_scales=cfg_scale_list, prog_bar=True, zs=zs[:(after_skip_steps)], controller=controller, 
-                                   guidance_noise_map=10.0, grad_scale=5e+3)
-
-        elif args.mode in ['ef', 'pnp_inv_p2p', 'ef_p2p']:
-
-            cfg_scale_list = [cfg_scale_src_edit, cfg_scale_tar_edit]
-
-            if args.mode=="ef":
-                edited_w0, _ = ef_wo_p2p(ldm_stable_each_query, xT=wts[after_skip_steps], etas=eta, prompts=[editing_prompt], cfg_scales=[cfg_scale_tar_edit], 
-                                  prog_bar=True, zs=zs[:(after_skip_steps)], controller=controller, is_ddim_inversion = is_ddim_inversion)
-            
-            elif args.mode=="pnp_inv_p2p" or args.mode == 'ef_p2p':
-                edited_w0, _ = ef_or_pnp_inv_w_p2p(ldm_stable_each_query, xT=wts[after_skip_steps], etas=eta, prompts=prompts, cfg_scales=cfg_scale_list, 
-                                            prog_bar=True, zs=zs[:(after_skip_steps)], controller=controller, is_ddim_inversion = is_ddim_inversion)
-    
         else:
-            raise NotImplementedError
+            if args.mode == 'h_edit_R':
+                edited_w0, _ = h_Edit_R_explicit(ldm_stable_each_query, xT=wts[after_skip_steps], eta=eta, prompts=prompts, cfg_scales=cfg_scale_list,
+                                                prog_bar = True, zs = zs[:(after_skip_steps)], controller = controller, 
+                                                after_skip_steps=after_skip_steps, is_ddim_inversion=is_ddim_inversion)
+            else:
+                edited_w0, _ = h_Edit_p2p_explicit(ldm_stable_each_query, xT=wts[after_skip_steps], eta=eta, prompts=prompts, cfg_scales=cfg_scale_list,
+                                                prog_bar = True, zs = zs[:(after_skip_steps)], controller = controller, 
+                                                after_skip_steps=after_skip_steps, is_ddim_inversion=is_ddim_inversion)
 
-    
         # 5.13. Use VAE to decode image
         with autocast("cuda"), inference_mode():
             x0_dec = ldm_stable_each_query.vae.decode(1 / 0.18215 * edited_w0).sample
@@ -277,3 +270,4 @@ if __name__ == "__main__":
         del ldm_stable_each_query
         torch.cuda.empty_cache()
         gc.collect()
+

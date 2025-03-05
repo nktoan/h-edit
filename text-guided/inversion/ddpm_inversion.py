@@ -51,9 +51,9 @@ def sample_xts_from_x0(model, x0, num_inference_steps=50):
     
     return xts, noise_added
 
-def inversion_forward_process_implicit_form(model, x0, 
+def inversion_forward_process_ddpm(model, x0, 
                             etas = None,    
-                            prog_bar = False,
+                            prog_bar = True,
                             prompt = "",
                             cfg_scale_src = 1.0,
                             cfg_scale_src_edit = 3.5,
@@ -64,6 +64,7 @@ def inversion_forward_process_implicit_form(model, x0,
     Parameters:
         model: Diffusion model with scheduler and U-Net (providing alphas, timesteps, etc.).
         x0 (torch.Tensor): Initial latent sample.
+        etas: Often set to 1.0
         prog_bar: Whether to display a progress bar.
         prompt: Input text prompt for conditioning.
         cfg_scale_src: Classifier-Free Guidance scale for the source (w^orig in our paper)

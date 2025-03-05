@@ -29,7 +29,7 @@ A. Method: NMG with PnP
 
 """
 
-def inversion_reverse_process_nmg_pnp(model, xT,  xT_ori, etas = 0,
+def nmg_pnp(model, xT,  xT_ori, etas = 0,
                                         prompts = "", cfg_scales = None,
                                         prog_bar = False, zs = None,
                                         guidance_noise_map = 10.0, grad_scale: float = 5e+3,):
@@ -314,7 +314,7 @@ D. Method: Edit Friendly (EF) or PnP Inv with PnP
 
 """
 
-def inversion_reverse_process_pnp(model, xT, etas = 0, prompts = "", cfg_scales = None,
+def ef_or_pnp_inv_w_pnp(model, xT, etas = 0, prompts = "", cfg_scales = None,
                                   prog_bar = False, zs = None, is_ddim_inversion = False):
 
     """

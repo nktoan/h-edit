@@ -192,10 +192,10 @@ C. Methods: Noise Map Guidance (NMG) WITH P2P
 
 """
 
-def nmg_p2p(model, xT,  xT_ori, etas = 0,
+def nmg_p2p(model, xT,  xT_ori, etas: float = 0.0,
             prompts = "", cfg_scales = None,
             prog_bar = False, zs = None, controller=None,
-            guidance_noise_map = 10.0, grad_scale: float = 5e+3,):
+            guidance_noise_map: float = 10.0, grad_scale: float = 5e+3,):
     
     """
     The implementation of NMG editing method combined with P2P. Note that NMG requires the array of x_t^orig to perform optimization.

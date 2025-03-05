@@ -198,4 +198,3 @@ def get_replacement_mapper(prompts, tokenizer, max_len=77):
         mapper = get_replacement_mapper_(x_seq, prompts[i], tokenizer, max_len)
         mappers.append(mapper)
     return torch.stack(mappers)
-
