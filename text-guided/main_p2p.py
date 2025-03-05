@@ -42,7 +42,7 @@ if __name__ == "__main__":
     
     # Data and output path
     parser.add_argument('--data_path', type=str, default="./PIE_Bench_Data")
-    parser.add_argument('--output_path', type=str, default="./output_images/p2p")
+    parser.add_argument('--output_path', type=str, default="./results/p2p")
 
     # Choose methods and editing categories
     parser.add_argument('--edit_category_list', nargs = '+', type=str, default=["0","1","2","3","4","5","6","7","8","9"]) 
@@ -57,7 +57,7 @@ if __name__ == "__main__":
 
     # For guidance strength
     parser.add_argument("--cfg_src", type=float, default=1.0)
-    parser.add_argument("--cfg_src_edit", type=float, default=1.0) #This is hat{w}^orig in our paper
+    parser.add_argument("--cfg_src_edit", type=float, default=5.0) #This is hat{w}^orig in our paper
     parser.add_argument("--cfg_tar", type=float, default=7.5)
     
     # Only for h-Edit
@@ -163,7 +163,7 @@ if __name__ == "__main__":
             eta = 1.0 #set eta = 1.0 to account for u_t^orig
         
         elif (eta > 0 and eta <= 1):
-            wt, zs, wts, _ = inversion_forward_process_ddpm(ldm_stable_each_query, w0, etas=eta, prompt=original_prompt, cfg_scale=cfg_scale_src, num_inference_steps=args.num_diffusion_steps)
+            wt, zs, wts, _ = inversion_forward_process_ddpm(ldm_stable_each_query, w0, etas=eta, prompt=original_prompt, cfg_scale_src=cfg_scale_src, num_inference_steps=args.num_diffusion_steps)
         
         else:
             print("Warning: out of range for eta")

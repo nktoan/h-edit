@@ -34,3 +34,5 @@ In some cases, try explicit form if implicit form 1 steps do not work well. Othe
 Use DDPM environment for evaluation
 
 Modify directory path correspondingly
+
+conda env create -f environment.yaml

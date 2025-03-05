@@ -1,0 +1,7 @@
+  -
+    image: /lizard.jpg
+    source_prompt: a green lizard is sitting on a branch
+    target_prompt: a brown lizard is sitting on a branch
+
+    blended_word: "lizard lizard"
+    editing_instruction: "Change the color of the lizard to brown"

@@ -7,7 +7,7 @@ This demo presents our SOTA editing method, h-edit-R + P2P. Its powerful feature
 - Step Skipping: Optionally bypass steps for efficiency and more faithfulness.
 - Other Option: Try the alternative explicit approach if desired.
 
-Happy coding and researching!
+Happy coding and researching,
 h-Edit's Authors.
 
 """
@@ -55,8 +55,8 @@ if __name__ == "__main__":
     parser.add_argument("--device_num", type=int, default=0)
     
     # Data and output path
-    parser.add_argument('--data_path', type=str, default="./assets/")
-    parser.add_argument('--output_path', type=str, default="./demo/real_images")
+    parser.add_argument('--data_path', type=str, default="./assets/demo")
+    parser.add_argument('--output_path', type=str, default="./results/demo")
 
     # Choose methods and editing categories
     parser.add_argument("--mode",  default="h_edit_R_p2p", help="modes: h_edit_R, ef, h_edit_D_p2p, nmg_p2p, pnp_inv_p2p, h_edit_R_p2p, ef_p2p")
@@ -66,11 +66,11 @@ if __name__ == "__main__":
     parser.add_argument("--skip",  type=int, default=0) 
 
     # Random or Deterministic Sampling
-    parser.add_argument("--eta", type=float, default=0.0) 
+    parser.add_argument("--eta", type=float, default=1.0) 
 
     # For guidance strength
     parser.add_argument("--cfg_src", type=float, default=1.0)
-    parser.add_argument("--cfg_src_edit", type=float, default=1.0) #This is hat{w}^orig in our paper
+    parser.add_argument("--cfg_src_edit", type=float, default=5.0) #This is hat{w}^orig in our paper
     parser.add_argument("--cfg_tar", type=float, default=7.5)
     
     # Only for h-Edit
@@ -80,8 +80,7 @@ if __name__ == "__main__":
 
     # For P2P
     parser.add_argument("--xa", type=float, default=0.4) #cross attn control
-    parser.add_argument("--sa", type=float, default=0.6) #self attn control: 0.6 for h-edit-D and 0.35 for h-edit-R
-
+    parser.add_argument("--sa", type=float, default=0.35) #self attn control: 0.6 for h-edit-D and 0.35 for h-edit-R
 
     args = parser.parse_args()
 
@@ -93,9 +92,8 @@ if __name__ == "__main__":
     # 1. Declare some global vars
     data_path=args.data_path
     output_path=args.output_path
-    edit_category_list=args.edit_category_list
 
-    full_data = dataset_from_yaml(data_path + "test_demo.yaml")
+    full_data = dataset_from_yaml(data_path + "/demo.yaml")
     device = f"cuda:{args.device_num}"
 
     cfg_scale_src = args.cfg_src
@@ -128,10 +126,11 @@ if __name__ == "__main__":
         ldm_stable_each_query = copy.deepcopy(ldm_stable).to(device)
 
         # 5.3 + 5.4. Define path to the image, editing_instruction, blended_word for P2P/ Load prompts
-        image_path = data_path + current_image_data['img']
+        image_path = data_path + current_image_data['image']
 
         original_prompt = current_image_data.get('source_prompt', "") # default empty string
         editing_prompt = current_image_data.get('target_prompt', "")
+        editing_instruction = current_image_data["editing_instruction"]
 
         blended_word = current_image_data["blended_word"].split(" ") if current_image_data["blended_word"] != "" else []
 
@@ -173,7 +172,7 @@ if __name__ == "__main__":
             eta = 1.0 #set eta = 1.0 to account for u_t^orig
         
         elif (eta > 0 and eta <= 1):
-            wt, zs, wts, _ = inversion_forward_process_ddpm(ldm_stable_each_query, w0, etas=eta, prompt=original_prompt, cfg_scale=cfg_scale_src, num_inference_steps=args.num_diffusion_steps)
+            wt, zs, wts, _ = inversion_forward_process_ddpm(ldm_stable_each_query, w0, etas=eta, prompt=original_prompt, cfg_scale_src=cfg_scale_src, num_inference_steps=args.num_diffusion_steps)
         
         else:
             print("Warning: out of range for eta")
@@ -214,7 +213,7 @@ if __name__ == "__main__":
                     eq_params_merged = eq_params_heuristic
             else:
                 eq_params_merged = eq_params
-                
+            
             controller = make_controller(prompts=prompts,  is_replace_controller = src_tar_len_eq_chosen,
                     cross_replace_steps=args.xa, self_replace_steps=args.sa,
                     blend_word=blend_word, equilizer_params=eq_params_merged,
@@ -225,7 +224,6 @@ if __name__ == "__main__":
 
         register_attention_control(ldm_stable_each_query, controller)
 
-        
         # 5.12 Editing, available methods: h_edit_R, h_edit_D_p2p, h_edit_R_p2p
 
         cfg_scale_list = [cfg_scale_src, cfg_scale_src_edit, cfg_scale_tar_edit]     

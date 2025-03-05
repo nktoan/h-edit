@@ -45,7 +45,7 @@ def preprocessing(src_prompt: str, tar_prompt: str, is_global_edit: bool = True)
     words_to_focus = tar_text.split() #intensify their attention values
 
     if len(words_to_focus) > 0:
-        eq_params = {"words": tuple(words_to_focus), "values": tuple(1.0 for _ in words_to_focus)}
+        eq_params = {"words": tuple(words_to_focus), "values": tuple(1.5 for _ in words_to_focus)}
     else:
         eq_params = None
         
