@@ -11,7 +11,7 @@
 ✅ **Theoretical Guarantee** - Provides both explicit and implicit forms with unique features. Math doesn't lie! 📏  
 🚀 **Training-Free, Simple, General** - Smarter edits, zero headaches! 🧠  
 🏆 **Strong Performance, SOTA on PieBench** - Tackles tough cases like a champ! 💪   
-🛠️ **Flexible** - Supports conditional scores, external reward models, and is the first to handle both simultaneously! 🎛️  
+🛠️ **Flexible** - Supports conditional scores, external reward models; the first to handle both simultaneously! 🎛️  
 🎯 **Compatible** - Works with deterministic/random inversion, P2P, MasaCtrl and Plug-n-Play or even without attention control! 🔄  
 🔌 **Plug-and-Play** - Just add a pretrained diffusion model, whether for images, text, audio, or graphs, and you're all set! ✨ 
 
