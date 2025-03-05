@@ -1,6 +1,6 @@
 from tqdm import tqdm
 import torch
-from inversion_utils import encode_text, get_variance
+from inversion.inversion_utils import encode_text, get_variance
 
 def sample_xts_from_x0(model, x0, num_inference_steps=50):
     """

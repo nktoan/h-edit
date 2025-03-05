@@ -4,10 +4,13 @@
 # Features
 - w^orig
 - w^edit
+- Implicit form/ Explicit form
 
 # TODO
 
 - Config file
+
+- Environment Setup!
 
 - Bash file
 
