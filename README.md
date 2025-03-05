@@ -33,7 +33,7 @@ If *h*-Edit helps your work, we’d love your feedback! Please consider citing o
 
 ## 🏆 Notable Results
 
-### 📊 SOTA Results on PieBench
+### 📊 SOTA on PieBench
 
 ![](assets/PieBench_Result.png)
 
