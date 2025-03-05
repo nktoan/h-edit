@@ -43,7 +43,7 @@ def ef_wo_p2p(model, xT,  etas = 0,
 
     """    
 
-    # 1. Define coefficients, embeddings, etas, etc
+    # 1. Prepare coefficients, embeddings, etas, etc
     batch_size = len(prompts)
     cfg_scales_tensor = torch.Tensor(cfg_scales).view(-1,1,1,1).to(model.device)
 

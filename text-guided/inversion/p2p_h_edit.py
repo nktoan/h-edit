@@ -3,7 +3,6 @@ from tqdm import tqdm
 
 import torch
 import torch.nn.functional as F
-from torch.optim.adam import Adam
 
 from inversion.inversion_utils import encode_text, reverse_step, compute_full_coeff
 
@@ -378,7 +377,7 @@ B.2. Implicit form with multiple optimization implicit loops (key features for h
 B.1. h-Edit-D and h-Edit-R WITH P2P in Explicit form
 """
 
-def h_Edit_p2p_explicit(model, xT, eta = 0, prompts = "", cfg_scales = None,
+def h_Edit_p2p_explicit(model, xT, eta = 1.0, prompts = "", cfg_scales = None,
                         prog_bar = False, zs = None, controller=None,
 
                         is_ddim_inversion = True, after_skip_steps=35):
@@ -527,7 +526,7 @@ def h_Edit_p2p_explicit(model, xT, eta = 0, prompts = "", cfg_scales = None,
 B.2. h-Edit-D and h-Edit-R WITH P2P in Implicit form
 """
 
-def h_Edit_p2p_implicit(model, xT, eta = 0, prompts = "", cfg_scales = None,
+def h_Edit_p2p_implicit(model, xT, eta = 1.0, prompts = "", cfg_scales = None,
                         prog_bar = False, zs = None, controller=None,
         
                         weight_reconstruction=0.075, optimization_steps=1, after_skip_steps=35,
@@ -541,7 +540,7 @@ def h_Edit_p2p_implicit(model, xT, eta = 0, prompts = "", cfg_scales = None,
     Parameters:
         model         : Model with a scheduler providing diffusion parameters.
         xT            : The last sample to start perform editing
-        etas          : eta should be 1 for h-Edit-R
+        etas          : eta should be 1 for h-Edit-R and h-edit-D (to account for u_t^orig)
         prompts       : source and target prompts
         cfg_scales    : classifier-free guidance strengths
         prog_bar      : whether to show prog_bar
@@ -640,7 +639,7 @@ def h_Edit_p2p_implicit(model, xT, eta = 0, prompts = "", cfg_scales = None,
             else:
                 attn_kwargs_no_save_attn = {'save_attn': True}
 
-            # Compute source for \eps(x_{t-1},t-1,c^src)
+            # Compute \eps(x_{t-1},t-1,c^src)
             with torch.no_grad():
                 cond_out_src = model.unet(xt_prev_opt, tt, encoder_hidden_states=text_embeddings[:1],cross_attention_kwargs = attn_kwargs_no_attn).sample
 
@@ -699,6 +698,6 @@ def h_Edit_p2p_implicit(model, xT, eta = 0, prompts = "", cfg_scales = None,
         if controller is not None:
             xt = controller.step_callback(xt)    
 
-    return xt[1].unsqueeze(0), xt[0].unsqueeze(0) #only return edit version!
+    return xt[1].unsqueeze(0), xt[0].unsqueeze(0)
 
 
