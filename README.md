@@ -2,11 +2,11 @@
 
 <a href="https://arxiv.org/pdf/2503.02187"><img src="https://img.shields.io/badge/https%3A%2F%2Farxiv.org%2Fabs%2F2304.01686-arxiv-brightred"></a>
 
-## Summary: 
+## Summary
 
 *h*-Edit is a finetuning-free diffusion-based editing method that frames editing as a reverse-time bridge modeling problem. It leverages `Doob’s h-Transform` for bridge construction and `Langevin Monte Carlo sampling` for generating edited samples.
 
-## 🔥 Key Features:  
+## 🔥 Key Features
 
 ✅ **Theoretical Guarantee** - Provides both explicit and implicit forms with unique features. Math doesn't lie! 📏  
 🚀 **Training-Free, Simple, General** - Smarter edits, zero headaches! 🧠  
@@ -15,7 +15,7 @@
 🎯 **Compatible** - Works with deterministic/random inversion, P2P, MasaCtrl and Plug-n-Play or even without attention control! 🔄  
 🔌 **Plug-and-Play** - Just add a pretrained diffusion model, whether for images, text, audio, or graphs, and you're all set! ✨ 
 
-## 🔬 Experiments:
+## 🔬 Experiments
 
 We showcase *h*-Edit's capabilities in three settings: **text-guided editing** (conditional scores), **face swapping** (external reward models), and **combined text-guided & style editing** (both). Each experiment is linked below.
 
