@@ -8,12 +8,12 @@
 
 ## 🔥 Key Features:  
 
-✅ **Theoretical Guarantee** – Provides both explicit and implicit forms with unique features. Math doesn't lie! 📏  
+✅ **Theoretical Guarantee** - Provides both explicit and implicit forms with unique features. Math doesn't lie! 📏  
 🚀 **Training-Free, Simple, General** - Smarter edits, zero headaches! 🧠  
-🏆 **Strong Performance, SOTA on PieBench** – Tackles tough cases like a champ! 💪   
-🛠️ **Flexible** – Supports conditional scores, external reward models, and is the first to handle both simultaneously! 🎛️  
-🎯 **Compatible** – Works with deterministic/random inversion, P2P, MasaCtrl and Plug-n-Play or even without attention control! 🔄  
-🔌 **Plug-and-Play** – Just add a pretrained diffusion model, whether for images, text, audio, or graphs, and you're all set! ✨ 
+🏆 **Strong Performance, SOTA on PieBench** - Tackles tough cases like a champ! 💪   
+🛠️ **Flexible** - Supports conditional scores, external reward models, and is the first to handle both simultaneously! 🎛️  
+🎯 **Compatible** - Works with deterministic/random inversion, P2P, MasaCtrl and Plug-n-Play or even without attention control! 🔄  
+🔌 **Plug-and-Play** - Just add a pretrained diffusion model, whether for images, text, audio, or graphs, and you're all set! ✨ 
 
 ## 🔬 Experiments:
 
@@ -31,7 +31,7 @@ If *h*-Edit helps your work, we’d love your feedback! ⭐ Please consider citi
 
 ## 🏆 Notable Results
 
-### 📊 Quantitative Results on PieBench
+### 📊 SOTA Results on PieBench
 
 ![](assets/PieBench_Result.png)
 
