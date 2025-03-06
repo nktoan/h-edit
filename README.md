@@ -18,7 +18,7 @@
 ## 🏗️ Overview of Implicit *h*-Edit 
 
 <p align="center">
-  <img src="assets/overview.png" alt="Overview of h-edit" width="75%">
+  <img src="assets/overview.png" alt="Overview of h-edit" width="100%">
 </p>
 
 ## 🔬 Experiments
