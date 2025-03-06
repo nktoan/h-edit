@@ -27,8 +27,11 @@ python main_demo.py --implicit
 Reproduce our SOTA results on PieBench in *four* steps: 
 
 1️⃣ **Prepare Dataset** - Download it [here](https://github.com/cure-lab/PnPInversion). No dataset, no party! 🎉 
+
 2️⃣ **Setup Environment** - Follow the instructions above for each attention control method. ⚡
+
 3️⃣ **Configure & Run** - Key parameters are pre-set in `main_{attention_control}.py`. We’ve got main files for all methods. Feeling lazy? 💤 Just grab our *h*-Edit scripts from `/scripts` and run! 
+
 4️⃣ **Run Evaluation** - Run `evaluation.py` in `/evaluation`, and coffee time ☕ ✨
 
 # 💡 Tips & Usage Guide  
@@ -69,10 +72,11 @@ Reproduce our SOTA results on PieBench in *four* steps:
 
 ## 🔍 Impact of $\hat{w}^{orig}$
 
+![](assets/teaser/impact_hat_w_orig.png)
+
 ## 🔄 Effect of Implicit Multiple Optimization Steps
  
-
-
+![](assets/teaser/impact_MOS.png)
 
 # 🎖️ Acknowledgments
 
