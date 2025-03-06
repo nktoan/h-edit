@@ -78,7 +78,7 @@ Reproduce our SOTA results on PieBench in *four* steps:
   <img src="assets/teaser/impact_hat_w_orig.png" alt="Impact of hat w orig" width="60%">
 </p>
 
-### 🔍 Robust to $(\hat{w}^{\text{orig}}, w^{\text{edit}})$  
+### 🔍 Robust to $(w^{\text{edit}}, \hat{w}^{\text{orig}})$  
 
 <p align="center">
   <img src="assets/teaser/impact_hat_w_orig_and_w_edit.png" alt="Robust to ws changes" width="60%">
