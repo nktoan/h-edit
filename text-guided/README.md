@@ -70,13 +70,17 @@ Reproduce our SOTA results on PieBench in *four* steps:
 
 ![](assets/teaser/comparison_h_edit_R.png)
 
-## 🔍 Impact of $\hat{w}^{orig}$
+## 🔍 Impact of $\hat{w}^{orig}$  
 
-![](assets/teaser/impact_hat_w_orig.png)
+<p align="center">
+  <img src="assets/teaser/impact_hat_w_orig.png" alt="Impact of hat w orig" width="60%">
+</p>
 
-## 🔄 Effect of Implicit Multiple Optimization Steps
- 
-![](assets/teaser/impact_MOS.png)
+## 🔄 Effect of Implicit Multiple Optimization Steps  
+
+<p align="center">
+  <img src="assets/teaser/impact_MOS.png" alt="Impact of MOS" width="60%">
+</p>
 
 # 🎖️ Acknowledgments
 
