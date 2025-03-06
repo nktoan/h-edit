@@ -15,6 +15,12 @@
 🎯 **Compatible** - Works with deterministic/random inversion, P2P, MasaCtrl and Plug-n-Play or even without attention control! 🔄  
 🔌 **Plug-and-Play** - Just add a pretrained diffusion model, whether for images, text, audio, or graphs, and you're all set! ✨ 
 
+## 🏗️ Overview of Implicit *h*-Edit 
+
+<p align="center">
+  <img src="assets/overview.png" alt="Overview of h-edit" width="75%">
+</p>
+
 ## 🔬 Experiments
 
 We showcase *h*-Edit's capabilities in three settings: **text-guided editing** (conditional scores), **face swapping** (external reward models), and **combined text-guided & style editing** (both). Each experiment is linked below.
