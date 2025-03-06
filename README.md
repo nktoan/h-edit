@@ -60,7 +60,7 @@ We showcase *h*-Edit's capabilities in three settings: **text-guided editing** (
 ## 📌 To-Do List
 
 - [x] Release code for **Face Swapping**
-- [ ] Release code for **Combined Text-Guided & Style Editing**
+- [x] Release code for **Combined Text-Guided & Style Editing**
 - [ ] Develop Webpage
 - [ ] Deploy on Hugging Face
 - [ ] Build App Demo
