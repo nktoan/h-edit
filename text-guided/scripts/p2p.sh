@@ -31,7 +31,7 @@ python3 ../main_p2p.py --implicit --mode=$mode \
 
 ## Explicit:
 
-# python3 main_edit.py --mode=$mode \
+# python3 ./main_p2p.py --mode=$mode \
 #     --data_path=$data_path --output_path=$output_path \
 #     --num_diffusion_steps=$num_diffusion_steps --skip=$skip \
 #     --eta=$eta --cfg_src=$cfg_src --cfg_src_edit=$cfg_src_edit \
