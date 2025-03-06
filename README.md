@@ -47,7 +47,7 @@ We showcase *h*-Edit's capabilities in three settings: **text-guided editing** (
 
 ![](assets/comparison_face_swapping.png)
 
-### 🎨 Combined Style & Text-Guided Editing Visualizations
+### 🎨 Combined Text-Guided & Style Editing Visualizations
 
 ![](assets/comparison_combined_editing.png)
 
