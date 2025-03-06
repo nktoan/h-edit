@@ -31,6 +31,12 @@ We showcase *h*-Edit's capabilities in three settings: **text-guided editing** (
 > If this repository is useful for your work, please cite it:
 >
 > ```LaTeX
+> @article{nguyen2025hedit,
+>  title={h-Edit: Effective and Flexible Diffusion-Based Editing via Doob's h-Transform},
+>  author={Nguyen, Toan and Do, Kien and Kieu, Duc and Nguyen, Thin},
+>  journal={arXiv preprint arXiv:2503.02187},
+>  year={2025}
+> }
 > ```
 
 ## 🏆 Notable Results
