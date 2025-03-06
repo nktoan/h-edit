@@ -1,5 +1,5 @@
 """
-This demo presents our SOTA editing method, h-edit-R + P2P. Its powerful features include:
+This demo presents our SOTA editing method, h-edit-R + P2P in the implicit form. Its powerful features include:
 
 - Tuning: Adjust parameters w^orig, hat{w}^orig, w^edit.
 - Multiple Optimization Loops, with a reconstruction weight for enhanced faithfulness.

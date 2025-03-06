@@ -2,56 +2,89 @@
 
 <a href="https://arxiv.org/pdf/2503.02187"><img src="https://img.shields.io/badge/https%3A%2F%2Farxiv.org%2Fabs%2F2503.02187-arxiv-brightred"></a>
 
-This is the sub-folder for experiments related to **text-guided editing** of *h*-Edit.
+This sub-folder contains experiments on **text-guided editing** with *h*-Edit. Given an image and its source prompt, we generate edited images based on a target prompt derived from the source.
 
-# Teaser
+# 🚀 Installation and Quick Start
+
+## 🛠️ Environment setup
+
+We provide environment files for each attention control: `environment_p2p.yaml`, `environment_masactrl.yaml`, and `environment_pnp.yaml`.  For h-Edit-R without Attention Control, use `environment_p2p.yaml`. Create the corresponding environment with:
+
+```bash
+conda env create -f environment_p2p.yaml
+```
+
+## 🎬 Running Demo
+
+We provide a quick demo with our strongest version, **implicit *h*-Edit-R + P2P**. You can also use your own images and source prompts to experiment with any target prompt!
+
+```bash
+python main_demo.py --implicit
+```
+
+## 📊 Running PieBench
+
+Reproduce our SOTA results on PieBench in *four* steps: 
+
+1️⃣ **Prepare Dataset** - Download it [here](https://github.com/cure-lab/PnPInversion). No dataset, no party! 🎉 
+2️⃣ **Setup Environment** - Follow the instructions above for each attention control method. ⚡
+3️⃣ **Configure & Run** - Key parameters are pre-set in `main_{attention_control}.py`. We’ve got main files for all methods. Feeling lazy? 💤 Just grab our *h*-Edit scripts from `/scripts` and run! 
+4️⃣ **Run Evaluation** - Run `evaluation.py` in `/evaluation`, and coffee time ☕ ✨
+
+# 💡 Tips & Usage Guide  
+
+## 🎯 Choosing Attention Control  
+- **P2P** is the recommended default.  
+- **Need pose edits?** Use **MasaCtrl** (e.g., sitting → standing).  
+- **No attention control?** *h*-Edit-R benefits from skipping initial steps for faithfulness.  
+
+## ⚙️ Using *h*-Edit Effectively  
+
+- **Random vs. Deterministic Inversion** - *h*-Edit-R (🎲) generally performs better.  
+- **Implicit vs. Explicit Form** - Implicit *h*-Edit is best for tough cases with unique optimization steps. But explicit form can also work well - give it a try!  
+- **Set** $\hat{w}^{orig}$ **close to** $w^{edit}$ for *optimal* reconstruction & editing. If too high, lower it—matching or exceeding $w^{edit}$ is suboptimal (see our paper!).  
+- **For tough cases, try:**  
+  1️⃣ Increasing both $w^{edit}$ and $\hat{w}^{orig}$.  
+  2️⃣ Using implicit *h*-Edit with *multiple optimization steps*, adjust reconstruction weight for better results.  
+- **Fine-tune P2P Parameters** - Adjust `xa`, `sa` for better control:  
+  - `xa = 0.4`, `sa = 0.6` for *h*-Edit-D on PieBench  
+  - `xa = 0.4`, `sa = 0.35` for *h*-Edit-R on PieBench  
+  - Experiment with your own settings for optimal results!  
+
+🚀 **Now go edit like a pro!** ✨
+
+# 🏆 Notable Results
+
+## 📊 SOTA on PieBench
+
+![](~/assets/PieBench_Result.png)
+
+## ⚖️ *h*-Edit-D vs. Baselines
+
+![](assets/teaser/comparison_h_edit_D.png)
+
+## ⚖️ *h*-Edit-R vs. Baselines
+
+![](assets/teaser/comparison_h_edit_R.png)
+
+## 🔍 Impact of $\hat{w}^{orig}$
+
+## 🔄 Effect of Implicit Multiple Optimization Steps
+ 
 
 
-# Results
-1. Quantitative 
-2. Qualitative
 
-# Guide
+# 🎖️ Acknowledgments
 
+We acknowledge the following implementations used in our development of *h*-Edit:  
 
-# Reproduce Pie-bench on our paper, see config and run!!!
+- [Edit Friendly](https://github.com/inbarhub/DDPM_inversion)  
+- [PnP Inversion](https://github.com/cure-lab/PnPInversion/)  
+- [Noise Map Guidance](https://github.com/hansam95/NMG)  
+- [Prompt-to-Prompt](https://github.com/google/prompt-to-prompt)  
 
+A huge thanks to these amazing works! 🙌 
 
-# Random or Deterministic Sampling
-
-PIE_Bench_Data (where to download?)
-
-Environment and Run!
-
-# Demo for a case (only h-edit)
-
-## Tips
-
-MasaCtrl good in poses changes while P2P yield the best results. To achieve the best results, you should use h-edit-R + P2P or h-edit-D + P2P in the implicit form, in case of hard cases, use  h-edit-R + P2P with multiple optimization steps.
-
-for most cases, use cfg_src near cfg_edit yields the best results, especially in changing colors. For more details, read our paper!
-
-In some cases, try explicit form if implicit form 1 steps do not work well. Otherwise, play around with (cfg_src, cfg_src_edit, cfg_tar)
-
-## Usage 
-
-Modify directory path correspondingly
-
-conda env create -f environment.yaml
-
-Prepare Datasets
-
-Arguments for each method is listed in each file.
-
-Create scripts for PieBench
-
-### Evaluation Use DDPM environment for evaluation
-
-
-## 🎖️ Acknowledgments
-
-We acknolwedge the codebase from previous methods: Edit Friendly, Noise Map Guidance, PnP Inv, Prompt-to-Prompt. Thank those amazing works!
-
-## 📬 Contact
+# 📬 Contact
 
 If you have any questions or suggestions, feel free to reach out!
