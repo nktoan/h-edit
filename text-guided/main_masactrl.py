@@ -90,6 +90,11 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
+    if args.mode == "h_edit_D_masactrl":
+        assert args.eta == 0.0, "eta should be 0.0 for h-Edit-D"
+    elif args.mode == "h_edit_R_masactrl":
+        assert args.eta == 1.0, "eta should be 1.0 for h-Edit-R"
+
     if not args.implicit:
         assert args.cfg_src == args.cfg_src_edit, "these two should be equal in explicit form"
 

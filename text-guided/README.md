@@ -14,6 +14,8 @@ We provide environment files for each attention control: `environment_p2p.yaml`,
 conda env create -f environment_p2p.yaml
 ```
 
+All experiments are run on **NVIDIA V100 32GB** gpus.
+
 ## 🎬 Running Demo
 
 We provide a quick demo with our strongest version, **implicit *h*-Edit-R + P2P**. You can also use your own images and source prompts to experiment with any target prompt!

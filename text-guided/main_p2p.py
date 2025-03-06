@@ -46,14 +46,14 @@ if __name__ == "__main__":
 
     # Choose methods and editing categories
     parser.add_argument('--edit_category_list', nargs = '+', type=str, default=["0","1","2","3","4","5","6","7","8","9"]) 
-    parser.add_argument("--mode",  default="h_edit_R_p2p", help="modes: h_edit_R, ef, h_edit_D_p2p, nmg_p2p, pnp_inv_p2p, h_edit_R_p2p, ef_p2p")
+    parser.add_argument("--mode",  default="h_edit_R_p2p", help="modes: h_edit_R, h_edit_D_p2p, h_edit_R_p2p, ef, ef_p2p, nmg_p2p, pnp_inv_p2p")
 
     # Sampling and skipping steps
     parser.add_argument("--num_diffusion_steps", type=int, default=50) 
     parser.add_argument("--skip",  type=int, default=0) 
 
     # Random or Deterministic Sampling
-    parser.add_argument("--eta", type=float, default=0.0) 
+    parser.add_argument("--eta", type=float, default=1.0) 
 
     # For guidance strength
     parser.add_argument("--cfg_src", type=float, default=1.0)
@@ -67,9 +67,14 @@ if __name__ == "__main__":
 
     # For P2P
     parser.add_argument("--xa", type=float, default=0.4) #cross attn control
-    parser.add_argument("--sa", type=float, default=0.6) #self attn control: 0.6 for h-edit-D and 0.35 for h-edit-R
+    parser.add_argument("--sa", type=float, default=0.35) #self attn control: 0.6 for h-edit-D and 0.35 for h-edit-R
 
     args = parser.parse_args()
+
+    if args.mode == "h_edit_D_p2p":
+        assert args.eta == 0.0, "eta should be 0.0 for h-Edit-D"
+    elif args.mode == "h_edit_R" or args.mode == "h_edit_R_p2p":
+        assert args.eta == 1.0, "eta should be 1.0 for h-Edit-R"
 
     if not args.implicit:
         assert args.cfg_src == args.cfg_src_edit, "these two should be equal in explicit form"
