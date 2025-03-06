@@ -135,6 +135,10 @@ if __name__ == "__main__":
 
         original_prompt = current_image_data.get('source_prompt', "") # default empty string
         editing_prompt = current_image_data.get('target_prompt', "")
+        
+        original_prompt = original_prompt.replace("[", "").replace("]", "")
+        editing_prompt = editing_prompt.replace("[", "").replace("]", "")
+
         editing_instruction = current_image_data["editing_instruction"]
 
         blended_word = current_image_data["blended_word"].split(" ") if current_image_data["blended_word"] != "" else []

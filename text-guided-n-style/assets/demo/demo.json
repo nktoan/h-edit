@@ -1,0 +1,18 @@
+{
+    "000000000022": {
+        "image_path": "000000000022.jpg",
+        "original_prompt": "an orange van with surfboards on top",
+        "editing_prompt": "an orange van with flowers on top",
+        "editing_instruction": "Replace the surfboards with flowers",
+        "blended_word": "surfboards flowers",
+        "style": "styles/colorful.jpg"
+    },
+    "000000000001": {
+        "image_path": "000000000001.jpg",
+        "original_prompt": "a round cake with orange frosting on a wooden plate",
+        "editing_prompt": "a square cake with orange frosting on a wooden plate",
+        "editing_instruction": "Change the cake shape to square",
+        "blended_word": "cake cake",
+        "style": "styles/flower.png"
+    }
+}
