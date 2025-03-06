@@ -10,7 +10,7 @@ skip=0 # skip = 15 for h-edit-R wo P2P
 eta=1.0  # 0.0 for h-Edit-D and 1.0 for h-Edit-R
 cfg_src=1.0
 cfg_src_edit=5.0  # Corresponds to \hat{w}^{orig} in our paper
-cfg_tar=7.5
+cfg_tar=7.5 # (cfg_src_edit, cfg_tar) = (9.0, 10.0) for h-Edit-D + P2P
 optimization_steps=1
 weight_reconstruction=0.1
 xa=0.4
