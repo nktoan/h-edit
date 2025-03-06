@@ -45,7 +45,7 @@ Reproduce our SOTA results on PieBench in *four* steps:
 
 ## ⚙️ Using *h*-Edit Effectively  
 
-- **Random vs. Deterministic Inversion** - *h*-Edit-R (🎲) generally performs better.  
+- **Random vs. Deterministic Inversion** - *h*-Edit-R (🎲) generally performs better, except for *MasaCtrl*, where *h*-Edit-D is preferred.
 - **Implicit vs. Explicit Form** - Implicit *h*-Edit is best for tough cases with unique optimization steps. But explicit form can also work well - give it a try!  
 - **Set** $\hat{w}^{orig}$ **close to** $w^{edit}$ for *optimal* reconstruction & editing. If too high, lower it—matching or exceeding $w^{edit}$ is suboptimal (see our paper!).  
 - **For tough cases, try:**  
