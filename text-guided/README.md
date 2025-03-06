@@ -4,9 +4,9 @@
 
 This sub-folder contains experiments on **text-guided editing** with *h*-Edit. Given an image and its source prompt, we generate edited images based on a target prompt derived from the source.
 
-# 🚀 Installation and Quick Start
+## 🚀 Installation and Quick Start
 
-## 🛠️ Environment setup
+### 🛠️ Environment setup
 
 We provide environment files for each attention control: `environment_p2p.yaml`, `environment_masactrl.yaml`, and `environment_pnp.yaml`.  For h-Edit-R without Attention Control, use `environment_p2p.yaml`. Create the corresponding environment with:
 
@@ -16,7 +16,7 @@ conda env create -f environment_p2p.yaml
 
 All experiments are run on **NVIDIA V100 32GB** gpus.
 
-## 🎬 Running Demo
+### 🎬 Running Demo
 
 We provide a quick demo with our strongest version, **implicit *h*-Edit-R + P2P**. You can also use your own images and source prompts to experiment with any target prompt!
 
@@ -24,7 +24,7 @@ We provide a quick demo with our strongest version, **implicit *h*-Edit-R + P2P*
 python main_demo.py --implicit
 ```
 
-## 📊 Running PieBench
+### 📊 Running PieBench
 
 Reproduce our SOTA results on PieBench in *four* steps: 
 
@@ -36,14 +36,14 @@ Reproduce our SOTA results on PieBench in *four* steps:
 
 4️⃣ **Run Evaluation** - Run `evaluation.py` in `/evaluation`, and coffee time ☕ ✨
 
-# 💡 Tips & Usage Guide  
+## 💡 Tips & Usage Guide  
 
-## 🎯 Choosing Attention Control  
+### 🎯 Choosing Attention Control  
 - **P2P** is the recommended default.  
 - **Need pose edits?** Use **MasaCtrl** (e.g., sitting → standing).  
 - **No attention control?** *h*-Edit-R benefits from skipping initial steps for faithfulness.  
 
-## ⚙️ Using *h*-Edit Effectively  
+### ⚙️ Using *h*-Edit Effectively  
 
 - **Random vs. Deterministic Inversion** - *h*-Edit-R (🎲) generally performs better, except for *MasaCtrl*, where *h*-Edit-D is preferred.
 - **Implicit vs. Explicit Form** - Implicit *h*-Edit is best for tough cases with unique optimization steps. But explicit form can also work well - give it a try!  
@@ -58,33 +58,33 @@ Reproduce our SOTA results on PieBench in *four* steps:
 
 🚀 **Check out our paper for more details - then go edit like a pro!** ✨
 
-# 🏆 Notable Results
+## 🏆 Notable Results
 
-## 📊 SOTA on PieBench
+### 📊 SOTA on PieBench
 
 ![](../assets/PieBench_Result.png)
 
-## ⚖️ *h*-Edit-D vs. Baselines
+### ⚖️ *h*-Edit-D vs. Baselines
 
 ![](assets/teaser/comparison_h_edit_D.png)
 
-## ⚖️ *h*-Edit-R vs. Baselines
+### ⚖️ *h*-Edit-R vs. Baselines
 
 ![](assets/teaser/comparison_h_edit_R.png)
 
-## 🔍 Impact of $\hat{w}^{orig}$  
+### 🔍 Impact of $\hat{w}^{orig}$  
 
 <p align="center">
   <img src="assets/teaser/impact_hat_w_orig.png" alt="Impact of hat w orig" width="60%">
 </p>
 
-## 🔄 Effect of Implicit Multiple Optimization Steps  
+### 🔄 Effect of Implicit Multiple Optimization Steps  
 
 <p align="center">
   <img src="assets/teaser/impact_MOS.png" alt="Impact of MOS" width="60%">
 </p>
 
-# 🎖️ Acknowledgments
+## 🎖️ Acknowledgments
 
 We acknowledge the following implementations used in our development of *h*-Edit:  
 
@@ -95,6 +95,6 @@ We acknowledge the following implementations used in our development of *h*-Edit
 
 A huge thanks to these amazing works! 🙌 
 
-# 📬 Contact
+## 📬 Contact
 
 If you have any questions or suggestions, feel free to reach out!

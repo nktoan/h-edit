@@ -4,9 +4,9 @@
 
 This sub-folder contains experiments on **combined text-guided and style editing** with *h*-Edit. Given an image, its source prompt, and a style image, we generate an edited image based on a target prompt while ensuring its style matches that of the style image.
 
-# 🚀 Installation and Quick Start
+## 🚀 Installation and Quick Start
 
-## 🛠️ Environment setup
+### 🛠️ Environment setup
 
 We provide the environment file `environment_p2p.yaml`. Create the environment with:  
 
@@ -16,7 +16,7 @@ conda env create -f environment_p2p.yaml
 
 All experiments are run on **NVIDIA V100 32GB** gpus.
 
-## 🎬 Running Demo
+### 🎬 Running Demo
 
 Try a quick demo with our method: **implicit *h*-Edit-R + P2P**. You can also experiment with your own images! Simply run: 
 
@@ -30,7 +30,7 @@ You can run a demo with the baseline **EF + P2P** using the following command:
 python main_edit.py --mode="ef_p2p"
 ```
 
-# 💡 Tips & Usage Guide  
+## 💡 Tips & Usage Guide  
 
 - 🎛️ **Tuning `weight_edit_clip`** – Adjust to control the strength of style editing. Experiment to find the best balance!  
   - For *h*-Edit-R + P2P, **[0.4, 0.8]** works well.  
@@ -43,13 +43,13 @@ python main_edit.py --mode="ef_p2p"
   - 🚫 **Avoid `local_blend`** – We find that it negatively impacts performance in this setting.
   - Experiment with your own settings for the best results!  
 
-# 🏆 Notable Results  
+## 🏆 Notable Results  
 
-## 🎨 Combined Text-Guided & Style Editing Visualizations
+### 🎨 Combined Text-Guided & Style Editing Visualizations
 
 ![](assets/teaser/comparsion_h_edit_R_vs_ef.png)
 
-# 🎖️ Acknowledge
+## 🎖️ Acknowledge
 
 We acknowledge the following implementations used in our development of *h*-Edit:  
 
@@ -59,6 +59,6 @@ We acknowledge the following implementations used in our development of *h*-Edit
 
 A huge thanks to these amazing works! 🙌 
 
-# 📬 Contact
+## 📬 Contact
 
 If you have any questions or suggestions, feel free to reach out!
