@@ -187,7 +187,6 @@ if __name__ == "__main__":
         if not is_ddim_inversion and key in ['122000000005', '122000000006', '000000000099', '214000000009']:
             src_tar_len_eq_chosen = src_tar_len_eq 
         
-        src_tar_len_eq_chosen = False
         if args.mode not in ['h_edit_D_p2p', 'h_edit_R_p2p']:
             src_tar_len_eq_chosen = False
 
