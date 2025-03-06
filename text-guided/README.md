@@ -56,7 +56,7 @@ Reproduce our SOTA results on PieBench in *four* steps:
   - `xa = 0.4`, `sa = 0.35` for *h*-Edit-R on PieBench  
   - Experiment with your own settings for optimal results!  
 
-🚀 **Now go edit like a pro!** ✨
+🚀 **Check out our paper for more details - then go edit like a pro!** ✨
 
 # 🏆 Notable Results
 
