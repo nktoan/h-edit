@@ -2,7 +2,7 @@
 
 <a href="https://arxiv.org/pdf/2503.02187"><img src="https://img.shields.io/badge/https%3A%2F%2Farxiv.org%2Fabs%2F2503.02187-arxiv-brightred"></a>
 
-This sub-folder contains experiments on **combined text-guided and style editing** with *h*-Edit. Given an image, its source prompt, and a style image, we generate edited images based on a target prompt while ensuring the style remains aligned with the style image.
+This sub-folder contains experiments on **combined text-guided and style editing** with *h*-Edit. Given an image, its source prompt, and a style image, we generate an edited image based on a target prompt while ensuring its style matches that of the style image.
 
 # 🚀 Installation and Quick Start
 
@@ -37,10 +37,10 @@ python main_edit.py --mode="ef_p2p"
   - For EF + P2P, **[1.0, 2.0]** is preferred.  
 
 - 🔧 **Setting $\hat{w}^{orig}$** – Keep it **close to** $w^{edit}$ for optimal reconstruction & editing, similar to text-guided editing.  
-  - If too high, lower it—matching or exceeding $w^{edit}$ is suboptimal (**see our paper**).  
+  - If too high, lower it—matching or exceeding $w^{edit}$ may be sub-optimal (see our paper!).
 
 - ⚙️ **Fine-tuning P2P Parameters** – Adjust `xa`, `sa` for better control.  
-  - 🚫 **Avoid `local_blend`** – We find that it negatively impacts performance.  
+  - 🚫 **Avoid `local_blend`** – We find that it negatively impacts performance in this setting.
   - Experiment with your own settings for the best results!  
 
 # 🏆 Notable Results  
