@@ -188,7 +188,7 @@ if __name__ == "__main__":
             src_tar_len_eq_chosen = src_tar_len_eq 
         
         if args.mode not in ['h_edit_D_p2p', 'h_edit_R_p2p']:
-            src_tar_len_eq_chosen = False
+            src_tar_len_eq_chosen = False # To make it consistent with PnP Inv's implementation
 
         # 5.11.2.  blend_word and importance weight eq_params
         prompts = [original_prompt, editing_prompt] 
