@@ -2,7 +2,7 @@
 
 <a href="https://arxiv.org/pdf/2503.02187"><img src="https://img.shields.io/badge/https%3A%2F%2Farxiv.org%2Fabs%2F2503.02187-arxiv-brightred"></a>
 
-This sub-folder contains experiments on **text-guided editing** with *h*-Edit. Given an image and its source prompt, we generate edited images based on a target prompt derived from the source.
+This sub-folder contains experiments on **text-guided editing** with *h*-Edit. Given an image and its source prompt, we generate edited images that align with a target prompt derived from the source.
 
 ## 🚀 Installation and Quick Start
 
