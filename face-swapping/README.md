@@ -18,7 +18,7 @@ All experiments are run on **NVIDIA V100 32GB** gpus.
 
 ### 📥 Download Pretrained Weights
 
-- Download the **human face diffusion models, ArcFace model, and face parsing model**, and place them in `./weights/` under their respective folders.  
+- Download the **human face diffusion model, ArcFace model, and face parsing model**, and place them in `./weights/` under their respective folders.  
   ➡️ [Download here](https://drive.google.com/drive/folders/1gIcKaTZiYRg2gSmjkjunT4DsTpHvAiYn?usp=sharing)  
 
 - Ensure you have the **CelebA-HQ dataset** for testing.  
@@ -50,7 +50,7 @@ python main_edit.py --mode="h_edit_R" --post_processing
 ### 🖼️ Face Swapping Visualization  
 
 <p align="center">
-  <img src="../assets/comparison_face_swapping.png" alt="Face Swapping Comparison" width="80%">
+  <img src="assets/comparison_face_swapping.png" alt="Face Swapping Comparison" width="80%">
 </p>
 
 ### 🎭 Works Well Without Masks  
