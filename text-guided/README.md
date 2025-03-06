@@ -84,7 +84,7 @@ Reproduce our SOTA results on PieBench in *four* steps:
   <img src="assets/teaser/impact_hat_w_orig_and_w_edit.png" alt="Robust to ws changes" width="60%">
 </p>
 
-### 🔄 Effect of Implicit Multiple Optimization Steps  
+### 🔄 Effect of Implicit Multiple Optimization Steps (1 → 3)
 
 <p align="center">
   <img src="assets/teaser/impact_MOS.png" alt="Impact of MOS" width="60%">
