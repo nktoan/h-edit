@@ -57,7 +57,7 @@ Reproduce our SOTA results on PieBench in *four* steps:
 
 ## 📊 SOTA on PieBench
 
-![](~/assets/PieBench_Result.png)
+![](../assets/PieBench_Result.png)
 
 ## ⚖️ *h*-Edit-D vs. Baselines
 
