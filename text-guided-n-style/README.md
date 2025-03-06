@@ -49,7 +49,7 @@ python main_edit.py --mode="ef_p2p"
 
 ![](assets/teaser/comparsion_h_edit_R_vs_ef.png)
 
-# Acknowledge
+# 🎖️ Acknowledge
 
 We acknowledge the following implementations used in our development of *h*-Edit:  
 

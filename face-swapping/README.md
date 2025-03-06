@@ -58,7 +58,7 @@ python main_edit.py --mode="h_edit_R" --post_processing
   <img src="assets/mask_vs_no_mask.png" alt="Works Well Without Masks" width="80%">
 </p>
 
-# Acknowledge
+# 🎖️ Acknowledge
 
 We acknowledge the following implementations used in our development of *h*-Edit:  
 
