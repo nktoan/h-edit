@@ -47,9 +47,9 @@ Reproduce our SOTA results on PieBench in *four* steps:
 
 - **Random vs. Deterministic Inversion** - *h*-Edit-R (🎲) generally performs better, except for *MasaCtrl*, where *h*-Edit-D is preferred.
 - **Implicit vs. Explicit Form** - Implicit *h*-Edit is best for tough cases with unique optimization steps. But explicit form can also work well - give it a try!  
-- **Set** $\hat{w}^{orig}$ **close to** $w^{edit}$ for *optimal* reconstruction & editing. If too high, lower it—matching or exceeding $w^{edit}$ may be suboptimal (see our paper!).  
+- **Set** $\hat{w}^{\text{orig}}$ **close to** $w^{\text{edit}}$ for *optimal* reconstruction & editing. If too high, lower it—matching or exceeding $w^{\text{edit}}$ may be suboptimal (see our paper!).  
 - **For tough cases, try:**  
-  1️⃣ Increasing both $w^{edit}$ and $\hat{w}^{orig}$.  
+  1️⃣ Increasing both $w^{\text{edit}}$ and $\hat{w}^{\text{orig}}$.  
   2️⃣ Using implicit *h*-Edit with *multiple optimization steps*, adjust reconstruction weight for better results.  
 - **Fine-tune P2P Parameters** - Adjust `xa`, `sa` for better control:  
   - `xa = 0.4`, `sa = 0.6` for *h*-Edit-D on PieBench  
@@ -72,10 +72,16 @@ Reproduce our SOTA results on PieBench in *four* steps:
 
 ![](assets/teaser/comparison_h_edit_R.png)
 
-### 🔍 Impact of $\hat{w}^{orig}$  
+### 🔍 Impact of $\hat{w}^{\text{orig}}$  
 
 <p align="center">
   <img src="assets/teaser/impact_hat_w_orig.png" alt="Impact of hat w orig" width="60%">
+</p>
+
+### 🔍 Robust to $(\hat{w}^{\text{orig}}, w^{\text{edit}})$  
+
+<p align="center">
+  <img src="assets/teaser/impact_hat_w_orig_and_w_edit.png" alt="Robust to ws changes" width="60%">
 </p>
 
 ### 🔄 Effect of Implicit Multiple Optimization Steps  

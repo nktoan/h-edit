@@ -36,8 +36,8 @@ python main_edit.py --mode="ef_p2p"
   - For *h*-Edit-R + P2P, **[0.4, 0.8]** works well.  
   - For EF + P2P, **[1.0, 2.0]** is preferred.  
 
-- 🔧 **Setting $\hat{w}^{orig}$** – Keep it **close to** $w^{edit}$ for optimal reconstruction & editing, similar to text-guided editing.  
-  - If too high, lower it—matching or exceeding $w^{edit}$ may be sub-optimal (see our paper!).
+- 🔧 **Setting $\hat{w}^{\text{orig}}$** – Keep it **close to** $w^{\text{edit}}$ for optimal reconstruction & editing, similar to text-guided editing.  
+  - If too high, lower it—matching or exceeding $w^{\text{edit}}$ may be sub-optimal (see our paper!).
 
 - ⚙️ **Fine-tuning P2P Parameters** – Adjust `xa`, `sa` for better control.  
   - 🚫 **Avoid `local_blend`** – We find that it negatively impacts performance in this setting.
