@@ -48,11 +48,14 @@ python main_edit.py --mode="h_edit_R" --post_processing
 # 🏆 Notable Results  
 
 ## 🖼️ Face Swapping Visualization  
-![Face Swapping Comparison](../assets/comparison_face_swapping.png)  
+
+<p align="center">
+  <img src="../assets/comparison_face_swapping.png" alt="Face Swapping Comparison" width="80%">
+</p>
 
 ## 🎭 Works Well Without Masks  
 <p align="center">
-  <img src="assets/mask_vs_no_mask.png" alt="Works Well Without Masks" width="60%">
+  <img src="assets/mask_vs_no_mask.png" alt="Works Well Without Masks" width="80%">
 </p>
 
 # Acknowledge
