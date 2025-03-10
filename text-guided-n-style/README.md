@@ -20,7 +20,7 @@ For the installation of CLIP, first activate the installed environment and then 
 pip install --no-cache-dir git+https://github.com/openai/CLIP.git
 ```
 
-Note: All our experiments are conducted on **NVIDIA V100 32GB** GPUs.
+All our experiments are conducted on **NVIDIA V100 32GB** GPUs.
 
 ### 🎬 Running Demo
 
