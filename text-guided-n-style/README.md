@@ -14,7 +14,7 @@ We provide the environment file `environment_p2p.yaml`. Create the environment w
 conda env create -f environment_p2p.yaml
 ```
 
-For the installation of CLIP, first activate the installed environment and then run:  
+For the installation of `CLIP`, first activate the installed environment and then run:  
 
 ```bash
 pip install --no-cache-dir git+https://github.com/openai/CLIP.git
