@@ -85,7 +85,7 @@ dependencies:
   - pip:
       - accelerate==0.34.2
       - click==8.1.7
-      - clip==1.0
+      - clip==0.2.0
       - diffusers==0.15.0
       - einops==0.8.0
       - face-alignment==1.4.1
