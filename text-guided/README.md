@@ -14,7 +14,13 @@ We provide environment files for each attention control: `environment_p2p.yaml`,
 conda env create -f environment_p2p.yaml
 ```
 
-All experiments are run on **NVIDIA V100 32GB** gpus.
+For the installation of CLIP, first activate the installed environment and then run:  
+
+```bash
+pip install --no-cache-dir git+https://github.com/openai/CLIP.git
+```
+
+Note: All our experiments are conducted on NVIDIA V100 32GB GPUs.
 
 ### 🎬 Running Demo
 
