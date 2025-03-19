@@ -74,9 +74,6 @@ if __name__ == "__main__":
     assert args.optimization_steps == 1, "we have not tested multiple optimization steps for this experiment"
     assert args.implicit, "we only demo the implicit form for this experiment"
 
-    if not args.implicit:
-        assert args.cfg_src == args.cfg_src_edit, "these two should be equal in explicit form"
-
     print(f'Arguments: {args}')
 
     # 1. Declare some global vars

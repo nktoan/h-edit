@@ -91,9 +91,6 @@ if __name__ == "__main__":
     elif args.mode == "h_edit_R_pnp":
         assert args.eta == 1.0, "eta should be 1.0 for h-Edit-R"
 
-    if not args.implicit:
-        assert args.cfg_src == args.cfg_src_edit, "these two should be equal in explicit form"
-
     print(f'Arguments: {args}')
 
     # 1. Declare some global vars
