@@ -212,7 +212,7 @@ if __name__ == "__main__":
                                                     zs=zs[:(after_skip_steps)],optimization_steps=args.optimization_steps, after_skip_steps=after_skip_steps, 
                                                     is_ddim_inversion = is_ddim_inversion)
 
-        elif args.mode=='pnp_masactrl':
+        elif args.mode in ['pnp_inv_masactrl', 'ef_masactrl']:
             cfg_scale_list = [cfg_scale_src, cfg_scale_tar_edit]
             edited_w0, _ = ef_or_pnp_inv_w_masactrl(ldm_stable_each_query, xT=wts[after_skip_steps], etas=eta, prompts=prompts, cfg_scales=cfg_scale_list, prog_bar=True, 
                                                     zs=zs[:(after_skip_steps)], is_ddim_inversion = is_ddim_inversion)
