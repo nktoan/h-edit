@@ -236,7 +236,7 @@ if __name__ == "__main__":
                                                    after_skip_steps=after_skip_steps, is_ddim_inversion=is_ddim_inversion)
 
         elif args.mode=='nmg':
-            cfg_scale_list = [cfg_scale_src_edit, cfg_scale_tar_edit]
+            cfg_scale_list = [cfg_scale_src, cfg_scale_tar_edit]
             
             edited_w0, _ = nmg_p2p(ldm_stable_each_query, xT=wts[after_skip_steps], xT_ori=wts[:(after_skip_steps+1)], etas=0.0, 
                                    prompts=prompts, cfg_scales=cfg_scale_list, prog_bar=True, zs=zs[:(after_skip_steps)], controller=controller, 
@@ -244,7 +244,7 @@ if __name__ == "__main__":
 
         elif args.mode in ['ef', 'pnp_inv_p2p', 'ef_p2p']:
 
-            cfg_scale_list = [cfg_scale_src_edit, cfg_scale_tar_edit]
+            cfg_scale_list = [cfg_scale_src, cfg_scale_tar_edit]
 
             if args.mode=="ef":
                 edited_w0, _ = ef_wo_p2p(ldm_stable_each_query, xT=wts[after_skip_steps], etas=eta, prompts=[editing_prompt], cfg_scales=[cfg_scale_tar_edit], 

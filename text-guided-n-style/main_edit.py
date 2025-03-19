@@ -216,7 +216,7 @@ if __name__ == "__main__":
                                                optimization_steps=args.optimization_steps, after_skip_steps=after_skip_steps, is_ddim_inversion = is_ddim_inversion)
             
         elif args.mode == 'ef_p2p':
-            cfg_scale_list = [cfg_scale_src_edit, cfg_scale_tar_edit]
+            cfg_scale_list = [cfg_scale_src, cfg_scale_tar_edit]
             edited_w0, _ = ef_p2p(ldm_stable_each_query, image_encoder = image_encoder, 
                                   xT=wts[after_skip_steps], etas=eta, prompts=prompts, cfg_scales=cfg_scale_list, prog_bar=True,
                                   zs=zs[:(after_skip_steps)], controller=controller, weight_edit_clip = args.weight_edit_clip_for_ef, 
