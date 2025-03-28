@@ -56,7 +56,7 @@ Reproduce our SOTA results on PieBench in *four* steps:
 - **Set** $\hat{w}^{\text{orig}}$ **close to** $w^{\text{edit}}$ for *optimal* reconstruction & editing. If too high, lower it—matching or exceeding $w^{\text{edit}}$ may be suboptimal (see our paper!).  
 - **For tough cases, try:**  
   1️⃣ Increasing both $w^{\text{edit}}$ and $\hat{w}^{\text{orig}}$.  
-  2️⃣ Using implicit *h*-Edit with *multiple optimization steps*, adjust reconstruction weight for better results. A recommended range for the reconstruction weight is `[0.0, 0.1]`, where $0.0$ is suitable for extremely challenging cases, and $0.1$ if reconstruction is to be prioritised.
+  2️⃣ Using implicit *h*-Edit with *multiple optimization steps*, adjust reconstruction weight for better results. A recommended range for the reconstruction weight is `[0.0, 0.1]`, where `0.0` is suitable for extremely challenging cases, and `0.1` if reconstruction is to be prioritised.
 - **Fine-tune P2P Parameters** - Adjust `xa`, `sa` for better control:  
   - `xa = 0.4`, `sa = 0.6` for *h*-Edit-D on PieBench  
   - `xa = 0.4`, `sa = 0.35` for *h*-Edit-R on PieBench  
