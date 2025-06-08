@@ -40,7 +40,7 @@ We showcase *h*-Edit's capabilities in three settings: **text-guided editing** (
 > @article{nguyen2025hedit,
 >  title={h-Edit: Effective and Flexible Diffusion-Based Editing via Doob's h-Transform},
 >  author={Nguyen, Toan and Do, Kien and Kieu, Duc and Nguyen, Thin},
->  journal={arXiv preprint arXiv:2503.02187},
+>  journal={CVPR},
 >  year={2025}
 > }
 > ```
