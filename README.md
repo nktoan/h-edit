@@ -1,6 +1,7 @@
 # *h*-Edit: Effective and Flexible Diffusion-Based Editing via Doob’s *h*-Transform (CVPR'25)
 
 <a href="https://arxiv.org/pdf/2503.02187"><img src="https://img.shields.io/badge/https%3A%2F%2Farxiv.org%2Fabs%2F2503.02187-arxiv-brightred"></a>
+
 <a href="https://nktoan.github.io/h-Edit-cvpr25/" target="_blank">[Project Page]</a>
 
 ## Summary
